@@ -1,0 +1,14 @@
+node_modules
+.next
+out
+.env*
+!.env.example
+npm-debug.log*
+
+# Exportaciones HTML antiguas (no forman parte de la app)
+preview.html
+preview-interactivo.html
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store

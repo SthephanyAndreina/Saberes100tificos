@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Andre/AppData/Roaming/Claude/local-agent-mode-sessions/skills-plugin/0b561fd2-7b7d-4b82-9365-2f14a4f6f46d/5bed2cc6-398e-460e-9ead-a5b9f5bb8452/skills/docx/**)",
+      "Bash(pandoc \"C:\\\\Users\\\\Andre\\\\Desktop\\\\Mejoras.docx\" -t markdown)",
+      "Read(//c/Users/Andre/Desktop/**)",
+      "Bash(python -c ' *)"
+    ]
+  }
+}
