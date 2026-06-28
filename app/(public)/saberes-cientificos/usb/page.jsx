@@ -28,9 +28,6 @@ export default async function UsbPage() {
             </div>
           ))}
         </div>
-        <div style={{ marginTop: 28, display: "flex", justifyContent: "center" }}>
-          <img src="/USB_logo.png" alt="Logo USB" style={{ width: 120, opacity: 0.85 }} />
-        </div>
       </section>
     </>
   );
