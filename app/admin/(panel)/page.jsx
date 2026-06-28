@@ -42,7 +42,7 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <PageTitle title="Bienvenida 👋" subtitle="Desde aquí gestionas todo el contenido del sitio, sin tocar código." />
+      <PageTitle title="Bienvenid@ 👋" subtitle="Gestiona todo el contenido de Saberes Científicos en un solo sitio" />
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 14, marginBottom: 28 }}>
         {stats.map((s) => (
