@@ -66,16 +66,32 @@ create table if not exists public.gallery_images (
 );
 create index if not exists gallery_images_gallery_idx on public.gallery_images(gallery_id, sort_order);
 
--- Recursos: guías de estudio (PDF) y enlaces a videos.
+-- Categorías de estudio de la sección Recursos (matemáticas, física, química…).
+-- Son independientes de las categorías (#) del blog.
+create table if not exists public.resource_categories (
+  id         uuid primary key default gen_random_uuid(),
+  name       text not null,
+  slug       text unique not null,
+  color      text default '#00838F',
+  sort_order int  default 0,
+  created_at timestamptz not null default now()
+);
+
+-- Recursos: guías de estudio (PDF/DOCX) y enlaces a videos.
 create table if not exists public.resources (
   id          uuid primary key default gen_random_uuid(),
   type        text not null default 'guide_pdf',       -- 'guide_pdf' | 'video_link'
   title       text not null,
   description text default '',
   url         text not null,
+  category_id uuid references public.resource_categories(id) on delete set null,
   sort_order  int  default 0,
   created_at  timestamptz not null default now()
 );
+
+-- Para bases de datos ya existentes: añade la columna de categoría si falta.
+alter table public.resources
+  add column if not exists category_id uuid references public.resource_categories(id) on delete set null;
 
 -- Carreras de la USB con enlace a su pensum.
 create table if not exists public.carreras (
@@ -119,6 +135,7 @@ alter table public.categories    enable row level security;
 alter table public.posts         enable row level security;
 alter table public.galleries     enable row level security;
 alter table public.gallery_images enable row level security;
+alter table public.resource_categories enable row level security;
 alter table public.resources     enable row level security;
 alter table public.carreras      enable row level security;
 alter table public.site_content  enable row level security;
@@ -141,7 +158,7 @@ do $$
 declare t text;
 begin
   foreach t in array array[
-    'categories','galleries','gallery_images','resources',
+    'categories','galleries','gallery_images','resource_categories','resources',
     'carreras','site_content','site_settings'
   ] loop
     execute format('drop policy if exists "%s read" on public.%I;', t, t);
@@ -176,6 +193,12 @@ create policy "sc admin delete" on storage.objects for delete
 insert into public.categories (slug, name, color, section, sort_order) values
   ('ciencias',               '#Ciencias',                      '#00838F', 'divulgacion', 1),
   ('mecanismo-ingreso-usb',  '#Mecanismo de ingreso a la USB', '#9C27B0', 'orientacion', 2)
+on conflict (slug) do nothing;
+
+insert into public.resource_categories (name, slug, color, sort_order) values
+  ('Matemáticas', 'matematicas', '#00838F', 1),
+  ('Física',      'fisica',      '#9C27B0', 2),
+  ('Química',     'quimica',     '#FCA210', 3)
 on conflict (slug) do nothing;
 
 insert into public.galleries (key, title, description) values
