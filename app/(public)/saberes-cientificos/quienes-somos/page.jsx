@@ -1,5 +1,6 @@
 import SectionHero from "@/components/ui/SectionHero";
 import Gallery from "@/components/gallery/Gallery";
+import RichContent from "@/components/ui/RichContent";
 import { getContent, getGallery, getSettings } from "@/lib/queries";
 import { colors as c, fonts } from "@/lib/theme";
 
@@ -16,8 +17,8 @@ export default async function QuienesSomosPage() {
 
   const bloques = [
     { label: "Misión", text: content.mision, color: c.cian },
-    { label: "Objetivo general", text: content.objetivo, color: c.magenta },
-    { label: "Adscripción", text: content.adscripcion, color: c.naranja },
+    { label: "Nuestra Visión", text: content.objetivo, color: c.magenta },
+    { label: "¿Qué hacemos?", text: content.adscripcion, color: c.naranja, rich: true },
   ];
 
   return (
@@ -30,7 +31,11 @@ export default async function QuienesSomosPage() {
             <div key={b.label} style={{ borderRadius: 20, border: "1.5px solid #ececec", background: "#fff", padding: "26px 24px", boxShadow: "0 2px 12px rgba(0,0,0,0.04)" }}>
               <div style={{ width: 40, height: 4, borderRadius: 4, background: b.color, marginBottom: 14 }} />
               <h3 style={{ fontSize: 17, fontWeight: 800, marginBottom: 10 }}>{b.label}</h3>
-              <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "#555" }}>{b.text}</p>
+              {b.rich ? (
+                <RichContent html={b.text} style={{ fontSize: 14.5 }} />
+              ) : (
+                <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "#555" }}>{b.text}</p>
+              )}
             </div>
           ))}
         </div>
@@ -53,7 +58,13 @@ export default async function QuienesSomosPage() {
           <div style={{ maxWidth: 560 }}>
             <h3 style={{ fontSize: 20, fontWeight: 800 }}>¿Eres estudiante de la USB?</h3>
             <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "rgba(255,255,255,0.78)", marginTop: 8 }}>
-              ¿Quieres tomar Saberes Científicos como tu proyecto de Servicio Comunitario? Completa el formulario y únete al equipo.
+              ¿Quieres tomar Saberes Científicos como tu proyecto de Servicio Comunitario?
+            </p>
+            <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "rgba(255,255,255,0.88)", marginTop: 10 }}>
+              ⏰ <strong>Duración:</strong> 120 horas reglamentarias.
+            </p>
+            <p style={{ fontSize: 14.5, lineHeight: 1.7, color: "rgba(255,255,255,0.88)", marginTop: 4 }}>
+              🎯 <strong>Dirigido a:</strong> Estudiantes de cualquier carrera apasionados por la divulgación científica.
             </p>
           </div>
           <a

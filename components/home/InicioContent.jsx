@@ -8,8 +8,8 @@ const heroBg = "/jardines.jpg";
 const chatUsbLogo = "/arbboard05_chatUSB.png";
 
 const cards = [
-  { title: "Orientación académica", text: "Dudas sobre ingreso a la universidad, vida estudiantil, carreras y decisiones académicas explicadas con lenguaje claro.", accent: c.cian, icon: "🎓", num: "01" },
-  { title: "Investigar mejor", text: "Apoyo para formular preguntas, buscar fuentes confiables y desarrollar ideas propias sin depender ciegamente de la IA.", accent: c.naranja, icon: "🔬", num: "02" },
+  { title: "Orientación académica y vocacional", text: "Dudas sobre ingreso a la universidad, carreras, mitos y decisiones sobre qué estudiar.", accent: c.cian, icon: "🎓", num: "01" },
+  { title: "Material de apoyo", text: "Guías descargables y contenido educativo accesible sobre química, física y matemática de 4to y 5to año de bachillerato para prepararte para tu ingreso a la universidad.", accent: c.naranja, icon: "📚", num: "02" },
   { title: "Acompañamiento continuo", text: "Las dudas más importantes suelen aparecer después de las charlas. chatUSB mantiene el contacto cuando realmente se necesita.", accent: c.fuccia, icon: "🤝", num: "03" },
 ];
 

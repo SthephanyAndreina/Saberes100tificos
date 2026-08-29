@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { CONTENT_SCHEMA, SETTINGS_SCHEMA } from "@/lib/content";
 import { Label, Input, Textarea, Button, Banner, admin } from "./ui";
+import TiptapEditor from "./TiptapEditor";
 import { fonts } from "@/lib/theme";
 
 export default function ContentManager({ content = {}, settings = {} }) {
@@ -63,7 +64,18 @@ function ContentBlock({ block, initial }) {
           {block.fields.map((f) => (
             <div key={f.name}>
               <Label>{f.label}</Label>
-              {f.type === "textarea" ? (
+              {f.type === "rich" ? (
+                <>
+                  <TiptapEditor
+                    value={values[f.name] ?? ""}
+                    onChange={(html) => set(f.name, html)}
+                    placeholder="Escribe aquí. Puedes usar listas con viñetas o numeradas."
+                  />
+                  <p style={{ fontSize: 12, color: admin.muted, marginTop: 6 }}>
+                    Usa los botones <strong>• Lista</strong> o <strong>1. Lista</strong> de la barra para crear listas que se verán correctamente en la página.
+                  </p>
+                </>
+              ) : f.type === "textarea" ? (
                 <Textarea value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} />
               ) : (
                 <Input value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} />
