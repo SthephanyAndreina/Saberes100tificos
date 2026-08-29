@@ -65,16 +65,11 @@ function ContentBlock({ block, initial }) {
             <div key={f.name}>
               <Label>{f.label}</Label>
               {f.type === "rich" ? (
-                <>
-                  <TiptapEditor
-                    value={values[f.name] ?? ""}
-                    onChange={(html) => set(f.name, html)}
-                    placeholder="Escribe aquí. Puedes usar listas con viñetas o numeradas."
-                  />
-                  <p style={{ fontSize: 12, color: admin.muted, marginTop: 6 }}>
-                    Usa los botones <strong>• Lista</strong> o <strong>1. Lista</strong> de la barra para crear listas que se verán correctamente en la página.
-                  </p>
-                </>
+                <TiptapEditor
+                  value={values[f.name] ?? ""}
+                  onChange={(html) => set(f.name, html)}
+                  placeholder="Escribe aquí. Puedes usar listas con viñetas o numeradas."
+                />
               ) : f.type === "textarea" ? (
                 <Textarea value={values[f.name] ?? ""} onChange={(e) => set(f.name, e.target.value)} />
               ) : (
